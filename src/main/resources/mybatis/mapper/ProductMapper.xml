@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jason.springbootmall.dao.ProductMapper">
+
+    <select id="getProductById" parameterType="int" resultType="Product">
+        SELECT product_id,product_name,category,image_url,price,stock,description,created_date,last_modified_date FROM product WHERE product_id=#{product_id}
+    </select>
+
+<!--    <insert id="insert1" parameterType="com.example.mybatistest.model.Student">-->
+<!--        insert into student(id,name)values(#{id},#{name});-->
+<!--    </insert>-->
+
+<!--    <update id="update1" parameterType="com.example.mybatistest.model.Student">-->
+<!--        update student set userName = #{userName} WHERE id=#{id}-->
+<!--    </update>-->
+
+<!--    <delete id="delete1" parameterType="string">-->
+<!--        delete FROM student WHERE id=#{value}-->
+<!--    </delete>-->
+</mapper>
