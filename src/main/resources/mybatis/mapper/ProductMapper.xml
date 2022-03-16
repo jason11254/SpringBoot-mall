@@ -13,9 +13,11 @@
         values (#{productName},#{category},#{imageUrl},#{price},#{stock},#{description},#{createdDate},#{lastModifiedDate});
     </insert>
 
-<!--    <update id="update1" parameterType="com.example.mybatistest.model.Student">-->
-<!--        update student set userName = #{userName} WHERE id=#{id}-->
-<!--    </update>-->
+    <update id="updateProduct" parameterType="Product">
+        update product set product_name=#{productName},category=#{category},image_url=#{imageUrl},price=#{price},
+                           stock=#{stock},description=#{description},last_modified_date=#{lastModifiedDate}
+        where product_id=#{productId}
+    </update>
 
 <!--    <delete id="delete1" parameterType="string">-->
 <!--        delete FROM student WHERE id=#{value}-->
