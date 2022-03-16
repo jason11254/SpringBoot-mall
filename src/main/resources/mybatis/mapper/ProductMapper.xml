@@ -19,7 +19,7 @@
         where product_id=#{productId}
     </update>
 
-<!--    <delete id="delete1" parameterType="string">-->
-<!--        delete FROM student WHERE id=#{value}-->
-<!--    </delete>-->
+    <delete id="deleteProductById" parameterType="int">
+        delete FROM product WHERE product_id=#{productId}
+    </delete>
 </mapper>

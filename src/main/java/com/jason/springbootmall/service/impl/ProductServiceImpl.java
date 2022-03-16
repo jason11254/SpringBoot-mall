@@ -41,4 +41,10 @@ public class ProductServiceImpl implements ProductService {
         product.setLastModifiedDate(now);
         productMapper.updateProduct(product);
     }
+
+    @Override
+    public void deleteProductById(Integer productId) {
+        productMapper.deleteProductById(productId);
+    }
+
 }
