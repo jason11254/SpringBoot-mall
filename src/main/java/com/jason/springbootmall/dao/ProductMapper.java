@@ -8,4 +8,5 @@ import org.springframework.stereotype.Component;
 @Component
 public interface ProductMapper {
     Product getProductById(Integer productId);
+    Integer createProduct(Product product);
 }

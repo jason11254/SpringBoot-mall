@@ -5,12 +5,13 @@
 <mapper namespace="com.jason.springbootmall.dao.ProductMapper">
 
     <select id="getProductById" parameterType="int" resultType="Product">
-        SELECT product_id,product_name,category,image_url,price,stock,description,created_date,last_modified_date FROM product WHERE product_id=#{product_id}
+        SELECT product_id,product_name,category,image_url,price,stock,description,created_date,last_modified_date FROM product WHERE product_id=#{productId}
     </select>
 
-<!--    <insert id="insert1" parameterType="com.example.mybatistest.model.Student">-->
-<!--        insert into student(id,name)values(#{id},#{name});-->
-<!--    </insert>-->
+    <insert id="createProduct" parameterType="Product" keyProperty="productId" useGeneratedKeys="true">
+        insert into product (product_name,category,image_url,price,stock,description,created_date,last_modified_date)
+        values (#{productName},#{category},#{imageUrl},#{price},#{stock},#{description},#{createdDate},#{lastModifiedDate});
+    </insert>
 
 <!--    <update id="update1" parameterType="com.example.mybatistest.model.Student">-->
 <!--        update student set userName = #{userName} WHERE id=#{id}-->
