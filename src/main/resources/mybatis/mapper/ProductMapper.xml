@@ -12,6 +12,18 @@
         SELECT product_id,product_name,category,image_url,price,stock,description,created_date,last_modified_date FROM product
     </select>
 
+    <select id="getProductsByCategory" parameterType="String" resultType="Product">
+        SELECT product_id,product_name,category,image_url,price,stock,description,created_date,last_modified_date FROM product WHERE category=#{category}
+    </select>
+
+    <select id="getProductsBySearch" parameterType="String" resultType="Product">
+        SELECT product_id,product_name,category,image_url,price,stock,description,created_date,last_modified_date FROM product WHERE product_name LIKE #{search}
+    </select>
+
+    <select id="getProductsByCategoryAndSearch" parameterType="String" resultType="Product">
+        SELECT product_id,product_name,category,image_url,price,stock,description,created_date,last_modified_date FROM product WHERE category=#{category} AND product_name LIKE #{search}
+    </select>
+
     <insert id="createProduct" parameterType="Product" keyProperty="productId" useGeneratedKeys="true">
         insert into product (product_name,category,image_url,price,stock,description,created_date,last_modified_date)
         values (#{productName},#{category},#{imageUrl},#{price},#{stock},#{description},#{createdDate},#{lastModifiedDate});

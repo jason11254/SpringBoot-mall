@@ -3,7 +3,6 @@ package com.jason.springbootmall.dao;
 import com.jason.springbootmall.model.Product;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Mapper
@@ -14,4 +13,7 @@ public interface ProductMapper {
     Integer updateProduct(Product product);
     Integer deleteProductById(Integer productId);
     List<Product> getProducts();
+    List<Product> getProductsByCategory(String category);
+    List<Product> getProductsBySearch(String search);
+    List<Product> getProductsByCategoryAndSearch(String category,String search);
 }

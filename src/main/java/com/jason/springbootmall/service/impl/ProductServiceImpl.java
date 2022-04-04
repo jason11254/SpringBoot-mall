@@ -1,5 +1,6 @@
 package com.jason.springbootmall.service.impl;
 
+import com.jason.springbootmall.constant.ProductCategory;
 import com.jason.springbootmall.dao.ProductMapper;
 import com.jason.springbootmall.dto.ProductRequest;
 import com.jason.springbootmall.dto.ProductRequestMethod;
@@ -48,8 +49,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProducts() {
-        return productMapper.getProducts();
+    public List<Product> getProducts(ProductCategory category,String search) {
+        if(category != null & search != null)
+            return productMapper.getProductsByCategoryAndSearch(category.name(),"%"+search+"%");
+        else if(category != null & search == null)
+            return productMapper.getProductsByCategory(category.name());
+        else if(search != null)
+            return productMapper.getProductsBySearch("%"+search+"%");
+        else
+            return productMapper.getProducts();
+
     }
 
 }
