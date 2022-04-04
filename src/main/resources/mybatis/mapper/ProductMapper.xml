@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jason.springbootmall.dao.ProductMapper">
+<mapper namespace="com.jason.springbootmall.mapper.ProductMapper">
 
     <select id="getProductById" parameterType="int" resultType="Product">
         SELECT product_id,product_name,category,image_url,price,stock,description,created_date,last_modified_date FROM product WHERE product_id=#{productId}

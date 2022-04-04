@@ -1,18 +1,19 @@
 package com.jason.springbootmall.service.impl;
 
 import com.jason.springbootmall.constant.ProductCategory;
-import com.jason.springbootmall.dao.ProductMapper;
+import com.jason.springbootmall.mapper.ProductMapper;
+import com.jason.springbootmall.dto.ProductQueryParams;
 import com.jason.springbootmall.dto.ProductRequest;
 import com.jason.springbootmall.dto.ProductRequestMethod;
 import com.jason.springbootmall.model.Product;
-import com.jason.springbootmall.service.ProductService;
+import com.jason.springbootmall.service.ProductMyBatisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.List;
 
 @Component
-public class ProductServiceImpl implements ProductService {
+public class ProductMyBatisServiceImpl implements ProductMyBatisService {
 
     @Autowired
     ProductMapper productMapper;
@@ -49,7 +50,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProducts(ProductCategory category,String search) {
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
+        ProductCategory category = productQueryParams.getCategory();
+        String search = productQueryParams.getSearch();
+
         if(category != null & search != null)
             return productMapper.getProductsByCategoryAndSearch(category.name(),"%"+search+"%");
         else if(category != null & search == null)

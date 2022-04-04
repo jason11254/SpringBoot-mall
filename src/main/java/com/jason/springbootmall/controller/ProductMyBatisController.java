@@ -1,9 +1,10 @@
 package com.jason.springbootmall.controller;
 
 import com.jason.springbootmall.constant.ProductCategory;
+import com.jason.springbootmall.dto.ProductQueryParams;
 import com.jason.springbootmall.dto.ProductRequest;
 import com.jason.springbootmall.model.Product;
-import com.jason.springbootmall.service.ProductService;
+import com.jason.springbootmall.service.ProductMyBatisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,16 +14,19 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-public class ProductController {
+public class ProductMyBatisController {
     @Autowired
-    ProductService productService;
+    ProductMyBatisService productService;
 
     @GetMapping("/products")
     public ResponseEntity<List<Product>> getProducts(
             @RequestParam(required = false) ProductCategory category,
             @RequestParam(required = false) String search
     ){
-        List<Product> productList = productService.getProducts(category,search);
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setCategory(category);
+        productQueryParams.setSearch(search);
+        List<Product> productList = productService.getProducts(productQueryParams);
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
 

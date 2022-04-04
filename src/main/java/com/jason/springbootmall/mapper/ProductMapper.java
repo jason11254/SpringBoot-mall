@@ -1,4 +1,4 @@
-package com.jason.springbootmall.dao;
+package com.jason.springbootmall.mapper;
 
 import com.jason.springbootmall.model.Product;
 import org.apache.ibatis.annotations.Mapper;
