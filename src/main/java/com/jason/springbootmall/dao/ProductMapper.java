@@ -4,6 +4,8 @@ import com.jason.springbootmall.model.Product;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Mapper
 @Component
 public interface ProductMapper {
@@ -11,4 +13,5 @@ public interface ProductMapper {
     Integer createProduct(Product product);
     Integer updateProduct(Product product);
     Integer deleteProductById(Integer productId);
+    List<Product> getProducts();
 }
