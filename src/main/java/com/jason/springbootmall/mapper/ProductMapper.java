@@ -12,8 +12,5 @@ public interface ProductMapper {
     Integer createProduct(Product product);
     Integer updateProduct(Product product);
     Integer deleteProductById(Integer productId);
-    List<Product> getProducts();
-    List<Product> getProductsByCategory(String category);
-    List<Product> getProductsBySearch(String search);
-    List<Product> getProductsByCategoryAndSearch(String category,String search);
+    List<Product> getProducts(String category,String search);
 }

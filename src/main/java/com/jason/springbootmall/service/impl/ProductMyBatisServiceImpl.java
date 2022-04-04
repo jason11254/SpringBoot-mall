@@ -51,18 +51,11 @@ public class ProductMyBatisServiceImpl implements ProductMyBatisService {
 
     @Override
     public List<Product> getProducts(ProductQueryParams productQueryParams) {
-        ProductCategory category = productQueryParams.getCategory();
+        String category = productQueryParams.getCategory().name();
         String search = productQueryParams.getSearch();
-
-        if(category != null & search != null)
-            return productMapper.getProductsByCategoryAndSearch(category.name(),"%"+search+"%");
-        else if(category != null & search == null)
-            return productMapper.getProductsByCategory(category.name());
-        else if(search != null)
-            return productMapper.getProductsBySearch("%"+search+"%");
-        else
-            return productMapper.getProducts();
-
+        if (search != null)
+            search = "%"+search+"%";
+        return productMapper.getProducts(category, search);
     }
 
 }
