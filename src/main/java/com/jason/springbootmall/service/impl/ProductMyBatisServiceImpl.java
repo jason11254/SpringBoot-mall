@@ -52,22 +52,9 @@ public class ProductMyBatisServiceImpl implements ProductMyBatisService {
 
     @Override
     public List<Product> getProducts(ProductQueryParams productQueryParams) {
-        ProductMyBatisParams productMyBatisParams = new ProductMyBatisParams();
 
-        // 種類
-        ProductCategory productCategory = productQueryParams.getCategory();
-        //String category = null;
-        if (productCategory != null){
-            //category = productCategory.name();
-            productMyBatisParams.setCategory(productCategory.name());
-        }
-
-        // 關鍵字
-        String search = productQueryParams.getSearch();
-        if (search != null){
-            //search = "%"+search+"%";
-            productMyBatisParams.setSearch("%"+search+"%");
-        }
+        // 關鍵字與種類
+        ProductMyBatisParams productMyBatisParams = productCategorySearchCheck(productQueryParams);
 
         // 排序
         //String orderByAndSort = productQueryParams.getOrderBy()+" "+productQueryParams.getSort();
@@ -83,6 +70,12 @@ public class ProductMyBatisServiceImpl implements ProductMyBatisService {
 
     @Override
     public Integer countProduct(ProductQueryParams productQueryParams) {
+        // 關鍵字與種類
+        ProductMyBatisParams productMyBatisParams = productCategorySearchCheck(productQueryParams);
+        return productMapper.countProducts(productMyBatisParams);
+    }
+
+    private ProductMyBatisParams productCategorySearchCheck(ProductQueryParams productQueryParams){
         ProductMyBatisParams productMyBatisParams = new ProductMyBatisParams();
 
         // 種類
@@ -96,7 +89,6 @@ public class ProductMyBatisServiceImpl implements ProductMyBatisService {
         if (search != null){
             productMyBatisParams.setSearch("%"+search+"%");
         }
-        return productMapper.countProducts(productMyBatisParams);
+        return  productMyBatisParams;
     }
-
 }
