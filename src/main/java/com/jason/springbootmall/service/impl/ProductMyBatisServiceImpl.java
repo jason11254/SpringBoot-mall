@@ -1,6 +1,7 @@
 package com.jason.springbootmall.service.impl;
 
 import com.jason.springbootmall.constant.ProductCategory;
+import com.jason.springbootmall.dto.ProductMyBatisParams;
 import com.jason.springbootmall.mapper.ProductMapper;
 import com.jason.springbootmall.dto.ProductQueryParams;
 import com.jason.springbootmall.dto.ProductRequest;
@@ -51,15 +52,33 @@ public class ProductMyBatisServiceImpl implements ProductMyBatisService {
 
     @Override
     public List<Product> getProducts(ProductQueryParams productQueryParams) {
+        ProductMyBatisParams productMyBatisParams = new ProductMyBatisParams();
+
+        // 種類
         ProductCategory productCategory = productQueryParams.getCategory();
-        String category = null;
+        //String category = null;
+        if (productCategory != null){
+            //category = productCategory.name();
+            productMyBatisParams.setCategory(productCategory.name());
+        }
+
+        // 關鍵字
         String search = productQueryParams.getSearch();
-        if (productCategory != null)
-            category = productCategory.name();
-        if (search != null)
-            search = "%"+search+"%";
-        String orderByAndSort = productQueryParams.getOrderBy()+" "+productQueryParams.getSort();
-        return productMapper.getProducts(category, search, orderByAndSort);
+        if (search != null){
+            //search = "%"+search+"%";
+            productMyBatisParams.setSearch("%"+search+"%");
+        }
+
+        // 排序
+        //String orderByAndSort = productQueryParams.getOrderBy()+" "+productQueryParams.getSort();
+        productMyBatisParams.setOrderByAndSort(productQueryParams.getOrderBy()+" "+productQueryParams.getSort());
+
+        //分頁
+        productMyBatisParams.setLimit(productQueryParams.getLimit());
+        productMyBatisParams.setOffset(productQueryParams.getOffset());
+
+        //return productMapper.getProducts(category,search,orderByAndSort);
+        return productMapper.getProducts(productMyBatisParams);
     }
 
 }

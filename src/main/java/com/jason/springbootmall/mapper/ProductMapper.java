@@ -1,5 +1,6 @@
 package com.jason.springbootmall.mapper;
 
+import com.jason.springbootmall.dto.ProductMyBatisParams;
 import com.jason.springbootmall.model.Product;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -12,5 +13,6 @@ public interface ProductMapper {
     Integer createProduct(Product product);
     Integer updateProduct(Product product);
     Integer deleteProductById(Integer productId);
-    List<Product> getProducts(String category,String search,String orderByAndSort);
+    //List<Product> getProducts(String category,String search, String orderByAndSort);
+    List<Product> getProducts(ProductMyBatisParams productMyBatisParams);
 }

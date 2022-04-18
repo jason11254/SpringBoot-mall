@@ -8,7 +8,7 @@
         SELECT product_id,product_name,category,image_url,price,stock,description,created_date,last_modified_date FROM product WHERE product_id=#{productId}
     </select>
 
-    <select id="getProducts" parameterType="String" resultType="Product">
+    <select id="getProducts" parameterType="com.jason.springbootmall.dto.ProductMyBatisParams" resultType="Product">
         SELECT product_id,product_name,category,image_url,price,stock,description,created_date,last_modified_date
         FROM product WHERE 1=1
         <if test="category != null">
@@ -18,6 +18,8 @@
             AND product_name LIKE #{search}
         </if>
         ORDER BY ${orderByAndSort}
+        limit #{limit}
+        offset #{offset}
     </select>
 
     <insert id="createProduct" parameterType="Product" keyProperty="productId" useGeneratedKeys="true">
