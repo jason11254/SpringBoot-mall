@@ -22,6 +22,17 @@
         offset #{offset}
     </select>
 
+    <select id="countProducts" parameterType="com.jason.springbootmall.dto.ProductMyBatisParams" resultType="Integer">
+        SELECT count(*)
+        FROM product WHERE 1=1
+        <if test="category != null">
+            AND category=#{category}
+        </if>
+        <if test="search != null">
+            AND product_name LIKE #{search}
+        </if>
+    </select>
+
     <insert id="createProduct" parameterType="Product" keyProperty="productId" useGeneratedKeys="true">
         insert into product (product_name,category,image_url,price,stock,description,created_date,last_modified_date)
         values (#{productName},#{category},#{imageUrl},#{price},#{stock},#{description},#{createdDate},#{lastModifiedDate});

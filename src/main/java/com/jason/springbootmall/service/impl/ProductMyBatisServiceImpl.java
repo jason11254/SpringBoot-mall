@@ -81,4 +81,22 @@ public class ProductMyBatisServiceImpl implements ProductMyBatisService {
         return productMapper.getProducts(productMyBatisParams);
     }
 
+    @Override
+    public Integer countProduct(ProductQueryParams productQueryParams) {
+        ProductMyBatisParams productMyBatisParams = new ProductMyBatisParams();
+
+        // 種類
+        ProductCategory productCategory = productQueryParams.getCategory();
+        if (productCategory != null){
+            productMyBatisParams.setCategory(productCategory.name());
+        }
+
+        // 關鍵字
+        String search = productQueryParams.getSearch();
+        if (search != null){
+            productMyBatisParams.setSearch("%"+search+"%");
+        }
+        return productMapper.countProducts(productMyBatisParams);
+    }
+
 }
